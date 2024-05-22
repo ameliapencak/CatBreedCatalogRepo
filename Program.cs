@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using CatBreedCatalog.Models;
+
+
 namespace CatBreedCatalog
 {
     public class Program
@@ -7,6 +13,13 @@ namespace CatBreedCatalog
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+           // options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            //builder.Services.AddDefaultIdentity<IdentityUser>()
+           //     .AddRoles<IdentityRole>()
+              //  .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
@@ -24,6 +37,7 @@ namespace CatBreedCatalog
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();

@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\photos\Ragdoll.jpg" />
+    <Content Remove="wwwroot\photos\Syjamski.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
@@ -26,6 +31,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\photos\MaineCoon.jpg" />
+    <None Include="wwwroot\photos\Ragdoll.jpg" />
+    <None Include="wwwroot\photos\Syjamski.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\css\" />
   </ItemGroup>
 
 </Project>

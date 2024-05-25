@@ -11,12 +11,10 @@ a.navbar-brand {
 
 header {
     margin: 20px 20px;
-    
 }
 
 .navbar-collapse {
     display: flex;
-   // justify-content:space-between;
     align-content: center;
 }
 
@@ -35,7 +33,6 @@ header {
 }
 
 .navbar-nav {
-    //flex-grow: 1;
     width: max-content;
 }
 
@@ -56,10 +53,15 @@ header {
     padding-right: 20px;
 }
 
-a {
-  color: #0077cd;
+.user-search-container {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
 }
 
+a {
+    color: #0077cd;
+}
 
 .btn-primary {
   color: #fff;

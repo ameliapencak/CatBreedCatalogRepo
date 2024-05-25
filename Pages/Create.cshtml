@@ -1,0 +1,44 @@
+﻿@page
+@model CatBreedCatalog.Pages.CreateModel
+@{
+	ViewData["Title"] = "Create New Cat Breed";
+}
+
+<h2 class="title-create fs-2 fw-bold">Create New Cat Breed</h2>
+
+<div class="container-create mt-3">
+	<div class="row">
+		<div class="col-md-6">
+			<form method="post">
+				<div class="form-group">
+					<label for="breedName">Breed Name</label>
+					<input type="text" class="form-control" id="breedName" name="breedName" placeholder="Enter breed name">
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<textarea class="form-control" id="description" name="description" placeholder="Describe the breed"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="origin">Origin</label>
+					<input type="text" class="form-control" id="origin" name="origin" placeholder="Enter breed origin">
+				</div>
+				<div class="form-group">
+					<label for="temperament">Temperament</label>
+					<input type="text" class="form-control" id="temperament" name="temperament" placeholder="Describe the temperament">
+				</div>
+				<div class="form-group">
+					<label for="image">Breed Image</label>
+					<input type="file" class="form-control-file" id="image" name="image" accept="image/jpeg">
+
+				</div>
+				<button type="submit" class="btn btn-outline-dark px-5">Create</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<img id="preview-image" src="#" alt="Preview Image">
+		</div>
+	</div>
+</div>
+
+
+

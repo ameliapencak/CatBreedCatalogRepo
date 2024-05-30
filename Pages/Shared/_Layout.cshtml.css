@@ -16,10 +16,11 @@ header {
 .navbar-collapse {
     display: flex;
     align-content: center;
+    justify-content: space-between; //
 }
 
 .navbar-brand {
-    position: center;
+   // position: center;
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -30,10 +31,14 @@ header {
         position: static;
         transform: none;
     }
+    .d-lg-flex {
+        display: none !important;
+    }
 }
 
 .navbar-nav {
-    width: max-content;
+    flex-direction: row;//
+    //width: max-content;
 }
 
 .navbar .form-control {
@@ -60,7 +65,7 @@ header {
 }
 
 a {
-    color: #0077cd;
+    color: black;
 }
 
 .btn-primary {
@@ -86,16 +91,16 @@ a {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+#footerContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .footer {
-  background-color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
 }

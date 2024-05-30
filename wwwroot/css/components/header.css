@@ -1,0 +1,35 @@
+﻿.custom-header {
+    max-height: 60px; 
+    display: flex;
+    justify-content:center;
+    align-content:center;
+    margin: 5px;
+        
+}
+
+.custom-buttons .btn {
+    white-space: nowrap;
+    border: solid 1px;
+    width: auto;
+    margin: 2px;
+}
+
+a {
+    color: black;
+}
+
+
+
+@media (max-width: 767px) {
+    .custom-header {
+        min-height: 140px;
+        height: auto; 
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .custom-buttons .btn {
+        width:auto;
+    }
+}

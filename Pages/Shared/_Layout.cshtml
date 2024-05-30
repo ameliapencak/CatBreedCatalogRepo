@@ -1,63 +1,53 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CatBreedCatalog</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CatBreedCatalog.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/components/card.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/pages/create.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/pages/user.css" asp-append-version="true" />
-    <script src="~/js/pages/createPage/displayImage.js" asp-append-version="true"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - CatBreedCatalog</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/CatBreedCatalog.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/components/card.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/components/header.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/pages/create.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/pages/user.css" asp-append-version="true" />
+	<script src="~/js/pages/createPage/displayImage.js" asp-append-version="true"></script>
 </head>
 <body>
-<header>
-     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <a class="navbar-brand fs-4 fw-bold" asp-area="" asp-page="/Index">Cat Catalog</a>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Create">Create</a>
-                    </li>
-                </ul>
-                <div class="user-search-container">
-                    <a asp-area="" asp-page="/User">
-                        <img src="~/photos/iconUser.png" alt="User Login" style="height: 32px; width: 32px;">
-                    </a>
-                <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                </form>
-                    </div>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-</header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - CatBreedCatalog - @DateTime.Now</a>
-        </div>
-    </footer>
+	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 m-1 border-bottom custom-header">
+		<a href="/Index" class="d-flex justify-content-center align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none fs-4 fw-bold">
+			Cat Catalog
+			
+		</a>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+			<li><a href="/Index" class="nav-link px-2 link-secondary">Home</a></li>
+			<li><a href="/Create" class="nav-link px-2 link-secondary">Create</a></li>
+		</ul>
 
-    @await RenderSectionAsync("Scripts", required: false)
+		<div class="d-flex col-sm-3 text-end align-items-center justify-content-center custom-buttons">
+			<a href="/User" class="btn btn-outline-dark">Login</a>
+		</div>
+	</header>
+
+	<div class="container">
+		<main role="main" class="pb-3 mt-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted">
+		<div class="container" id="footerContainer">
+			&copy; 2024 - CatBreedCatalog</a>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

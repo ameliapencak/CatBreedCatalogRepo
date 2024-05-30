@@ -2,13 +2,15 @@
     width: 80%;
     margin: auto;
     overflow: hidden;
+  
 }
 
 .split-screen {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    min-height: 100vh;
+    min-height: 70vh;
+
 }
 
 .left, .right {
@@ -16,6 +18,7 @@
     padding: 30px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
 }
 
 .divider {
@@ -27,15 +30,17 @@
 
 .or-box {
     width: 50px;
-    height: 50px;
+    height: 30px;
     background-color: #f8f9fa;
-    border-radius: 25px;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-weight: bold;
     color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
 }
 
 .signup h2, .login h2 {
@@ -64,6 +69,29 @@ button {
     transition: background-color 0.3s ease;
 }
 
-    button:hover {
-        background-color: #4cae4c;
+button:hover {
+    background-color: #4cae4c;
+}
+
+@media (max-width: 767px) {
+    .split-screen {
+        flex-direction: column;
     }
+
+    .divider {
+        margin: 5px 0;
+    }
+
+    .left, .right {
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        padding: 20px 20px;
+    }
+
+    .container-user {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+}

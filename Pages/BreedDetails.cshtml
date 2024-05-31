@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int}"
 @model CatBreedCatalog.Pages.BreedDetailsModel
 @{
 	ViewData["Title"] = "Breed Details page";
@@ -6,20 +6,27 @@
 
 <div class="container mt-5">
 	<div class="card mb-3" id="detailsCard" style="position: relative;">
-	<div class="row">
+		<div class="row">
+
 			<div class="col-md-4">
-				<img src="~/photos/Ragdoll.jpg" class="card-img-details img-fluid" style="object-fit: contain; height: 100%;" alt="Breed Image">
+				@{
+					var imageBase64 = Model.CatBreed.ImageData != null
+					? "data:image/jpeg;base64," + Convert.ToBase64String(Model.CatBreed.ImageData)
+					: "~/photos/iconPhoto.png";
+				}
+				<img src="@imageBase64" class="card-img-details img-fluid" style="object-fit: contain; height: 100%;" alt="Breed Image">
 			</div>
 			<div class="col-md-8">
+				
 				<div class="card-body">
-					<h5 class="card-title">Breed Name</h5>
-					<p class="card-text"><strong>Description:</strong> Description of the breed</p>
-					<p class="card-text"><strong>Origin:</strong> Origin of the breed</p>
-					<p class="card-text"><strong>Temperament:</strong> Temperament</p>
-					<a href="EditBreed" class="btn btn-outline-dark" id="buttonEdit">Edit</a>
+					<h5 class="card-title">@Model.CatBreed.Name</h5>
+					<p class="card-text"><strong>Description:</strong> @Model.CatBreed.Description</p>
+					<p class="card-text"><strong>Origin:</strong> @Model.CatBreed.Origin</p>
+					<p class="card-text"><strong>Temperament:</strong> @Model.CatBreed.Temperament</p>
+					<a asp-page="/EditBreed" asp-route-id="@Model.CatBreed.Id" class="btn btn-outline-dark" id="buttonEdit">Edit</a>
+				
 				</div>
-				</div>
-			
+			</div>
 		</div>
 	</div>
 </div>

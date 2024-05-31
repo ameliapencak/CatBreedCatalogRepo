@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CatBreedCatalog.Models;
+using CatBreedCatalog.Data;
 
 
 namespace CatBreedCatalog
@@ -12,20 +13,22 @@ namespace CatBreedCatalog
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-           // options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-            //builder.Services.AddDefaultIdentity<IdentityUser>()
-           //     .AddRoles<IdentityRole>()
-              //  .AddEntityFrameworkStores<ApplicationDbContext>();
-
             builder.Services.AddRazorPages();
 
-            var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+			builder.Services.AddDbContext<CatBreedContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("CatBreedContext")));//
+
+
+			var app = builder.Build();
+
+			using (var scope = app.Services.CreateScope())
+			{
+				var services = scope.ServiceProvider;
+				var context = services.GetRequiredService<CatBreedContext>();
+				context.Database.EnsureCreated(); // Ensure the database is created without migrations
+			}
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.

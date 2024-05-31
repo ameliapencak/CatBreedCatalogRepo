@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int}"
 @model EditBreedModel
 @{
 	ViewData["Title"] = "Edit Cat Breed";
@@ -9,34 +9,40 @@
 <div class="container-create mt-3">
 	<div class="row">
 		<div class="col-md-6">
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
+				<input type="hidden" asp-for="CatBreed.Id" />
 				<div class="form-group">
 					<label for="breedName">Breed Name</label>
-					<input type="text" class="form-control" id="breedName" name="breedName" placeholder="Enter breed name">
+					<input type="text" class="form-control" id="breedName" name="CatBreed.Name" value="@Model.CatBreed.Name" placeholder="Enter breed name">
 				</div>
 				<div class="form-group">
 					<label for="description">Description</label>
-					<textarea class="form-control" id="description" name="description" placeholder="Describe the breed"></textarea>
+					<textarea class="form-control" id="description" name="CatBreed.Description" placeholder="Describe the breed">@Model.CatBreed.Description</textarea>
 				</div>
 				<div class="form-group">
 					<label for="origin">Origin</label>
-					<input type="text" class="form-control" id="origin" name="origin" placeholder="Enter breed origin">
+					<input type="text" class="form-control" id="origin" name="CatBreed.Origin" value="@Model.CatBreed.Origin" placeholder="Enter breed origin">
 				</div>
 				<div class="form-group">
 					<label for="temperament">Temperament</label>
-					<input type="text" class="form-control" id="temperament" name="temperament" placeholder="Describe the temperament">
+					<input type="text" class="form-control" id="temperament" name="CatBreed.Temperament" value="@Model.CatBreed.Temperament" placeholder="Describe the temperament">
 				</div>
 				<div class="form-group">
 					<label for="image">Breed Image</label>
 					<input type="file" class="form-control-file" id="image" name="image" accept="image/jpeg">
-
 				</div>
-				
+
+
+				<div class="col-md-6">
+					@{
+						var imageBase64 = Model.CatBreed.ImageData != null
+						? "data:image/jpeg;base64," + Convert.ToBase64String(Model.CatBreed.ImageData)
+						: "~/photos/iconPhoto.png";
+					}
+					<img id="preview-image" src="@imageBase64" alt="Preview Image" class="img-thumbnail">
+				</div>
+				<button type="submit" class="btn btn-outline-dark px-5 m-2 submit-button">Save</button>
 			</form>
 		</div>
-		<div class="col-md-6">
-			<img id="preview-image" src="~/photos/2024-05-30 20_06_27-Search results for Photo - Flaticon.png" alt="Preview Image" class="img-thumbnail">
-		</div>
-		<button type="submit" class="btn btn-outline-dark px-5 m-2 submit-button">Save</button>
 	</div>
 </div>

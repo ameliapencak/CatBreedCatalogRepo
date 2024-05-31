@@ -6,32 +6,21 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="up-card col-md-4 mb-4">
-            <div class="card" >
-                <img src="~/photos/Syjamski.jpg" class="card-img-top" alt="Breed Image">
-                <div class="card-body">
-                    <h5 class="card-title">Cat</h5>
-                    <a href="BreedDetails" class="btn btn-outline-dark">Learn more</a>
+        @foreach (var breed in Model.CatBreeds)
+        {
+            var imageBase64 = breed.ImageData != null
+            ? "data:image/jpeg;base64," + Convert.ToBase64String(breed.ImageData)
+            : "~/photos/iconPhoto.png";
+            <div class="up-card col-md-4 mb-4">
+                <div class="card">
+                    <img src="@imageBase64" class="card-img-top" alt="Breed Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@breed.Name</h5>
+                        <a asp-page="/BreedDetails" asp-route-id="@breed.Id" class="btn btn-outline-dark">Learn more</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="up-card col-md-4 mb-4">
-            <div class="card">
-                <img src="~/photos/MaineCoon.jpg" class="card-img-top" alt="Breed Image">
-                <div class="card-body">
-                    <h5 class="card-title">Maine Coon</h5>
-                    <a href="BreedDetails" class="btn btn-outline-dark">Learn more</a>
-                </div>
-            </div>
-        </div>
-        <div class="up-card col-md-4 mb-4">
-            <div class="card">
-                <img src="~/photos/Ragdoll.jpg" class="card-img-top" alt="Breed Image">
-                <div class="card-body">
-                    <h5 class="card-title">Ragdoll</h5>
-                    <a href="BreedDetails" class="btn btn-outline-dark">Learn more</a>
-                </div>
-            </div>
-        </div>
+        }
+       
     </div>
 </div>

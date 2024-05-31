@@ -33,16 +33,17 @@
 				</div>
 
 
-				<div class="col-md-6">
-					@{
-						var imageBase64 = Model.CatBreed.ImageData != null
-						? "data:image/jpeg;base64," + Convert.ToBase64String(Model.CatBreed.ImageData)
-						: "~/photos/iconPhoto.png";
-					}
-					<img id="preview-image" src="@imageBase64" alt="Preview Image" class="img-thumbnail">
-				</div>
+				
 				<button type="submit" class="btn btn-outline-dark px-5 m-2 submit-button">Save</button>
 			</form>
+		</div>
+		<div class="col-md-6">
+			@{
+				var imageBase64 = Model.CatBreed.ImageData != null
+				? "data:image/jpeg;base64," + Convert.ToBase64String(Model.CatBreed.ImageData)
+				: Url.Content("~/photos/iconPhoto.png");
+			}
+			<img id="preview-image" src="@imageBase64" alt="Preview Image" class="img-thumbnail">
 		</div>
 	</div>
 </div>

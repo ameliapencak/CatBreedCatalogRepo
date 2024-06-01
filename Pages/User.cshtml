@@ -1,36 +1,50 @@
 ﻿@page
-@model UserModel
+@using System.Security.Claims
+@model CatBreedCatalog.Pages.UserModel
 @{
-	ViewData["Title"] = "Login/Register";
+    ViewData["Title"] = "Login/Register";
 }
 
-<div class="container-user">
-    <div class="split-screen">
-        <div class="left">
-            <section class="signup">
-                <h2>Register</h2>
-                <form method="post">
-                    <input type="text" name="fullName" placeholder="Full Name" required>
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
-                    <button type="submit" class="btn btn-outline-dark" asp-page-handler="Register">Register</button>
-                </form>
-            </section>
-        </div>
-        <div class="divider">
-            <div class="or-box">OR</div>
-        </div>
-        <div class="right">
-            <section class="login">
-                <h2>Login</h2>
-                <form method="post">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit" class="btn btn-outline-dark" asp-page-handler="Login">Login</button>
-                </form>
-            </section>
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <p>Jesteś zalogowany jako @User.Identity.Name</p>
+        <p>Rola: @User.FindFirst(ClaimTypes.Role)?.Value</p>
+        <form method="post" asp-page-handler="Logout">
+            <button type="submit" class="btn btn-outline-dark">Logout</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container-user">
+        <div class="split-screen">
+            <div class="left">
+                <section class="signup">
+                    <h2>Register</h2>
+                    <form method="post" asp-page-handler="Register">
+                        <input type="text" asp-for="FullName" placeholder="Full Name" required>
+                        <input type="text" asp-for="Username" placeholder="Username" required>
+                        <input type="email" asp-for="Email" placeholder="Email" required>
+                        <input type="password" asp-for="Password" placeholder="Password" required>
+                        <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" required>
+                        <button type="submit" class="btn btn-outline-dark">Register</button>
+                    </form>
+                </section>
+            </div>
+            <div class="divider">
+                <div class="or-box">OR</div>
+            </div>
+            <div class="right">
+                <section class="login">
+                    <h2>Login</h2>
+                    <form method="post" asp-page-handler="Login">
+                        <input type="email" asp-for="Email" placeholder="Email" required>
+                        <input type="password" asp-for="Password" placeholder="Password" required>
+                        <button type="submit" class="btn btn-outline-dark">Login</button>
+                    </form>
+                </section>
+            </div>
         </div>
     </div>
-</div>
+}

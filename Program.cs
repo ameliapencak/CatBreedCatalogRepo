@@ -17,7 +17,22 @@ namespace CatBreedCatalog
 
 
 			builder.Services.AddDbContext<CatBreedContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("CatBreedContext")));//
+			
+            builder.Services.AddDistributedMemoryCache();
+			builder.Services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromMinutes(30);
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+			});
 
+            builder.Services.AddAuthentication("Cookies")
+            .AddCookie("Cookies", options =>
+            {
+                options.LoginPath = "/User/Login";
+            });
+
+            builder.Services.AddAuthorization();
 
 			var app = builder.Build();
 

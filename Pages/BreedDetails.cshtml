@@ -23,8 +23,17 @@
 					<p class="card-text"><strong>Description:</strong> @Model.CatBreed.Description</p>
 					<p class="card-text"><strong>Origin:</strong> @Model.CatBreed.Origin</p>
 					<p class="card-text"><strong>Temperament:</strong> @Model.CatBreed.Temperament</p>
-					<a asp-page="/EditBreed" asp-route-id="@Model.CatBreed.Id" class="btn btn-outline-dark" id="buttonEdit">Edit</a>
-				
+					@if (User.Identity.IsAuthenticated)
+					{
+						<a asp-page="/EditBreed" asp-route-id="@Model.CatBreed.Id" class="btn btn-outline-dark" id="buttonEdit">Edit</a>
+						@if (User.IsInRole("Admin"))
+						{
+							<form method="post" asp-page-handler="Delete">
+								<input type="hidden" asp-for="CatBreed.Id" />
+								<button type="submit" class="btn btn-outline-danger" id="buttonDelete">Delete</button>
+							</form>
+						}
+					}
 				</div>
 			</div>
 		</div>

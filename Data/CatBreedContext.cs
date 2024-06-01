@@ -11,5 +11,6 @@ namespace CatBreedCatalog.Data
 		}
 
 		public DbSet<CatBreed> CatBreeds { get; set; }
+		public DbSet<User> Users { get; set; }
 	}
 }

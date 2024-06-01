@@ -22,5 +22,22 @@ namespace CatBreedCatalog.Pages
 
 			
 		}
+		public async Task<IActionResult> OnPostDeleteAsync(int id)
+		{
+			if (!User.IsInRole("Admin"))
+			{
+				return Unauthorized();
+			}
+
+			var catBreed = await _context.CatBreeds.FindAsync(id);
+
+			if (catBreed != null)
+			{
+				_context.CatBreeds.Remove(catBreed);
+				await _context.SaveChangesAsync();
+			}
+
+			return RedirectToPage("/Index");
+		}
 	}
 }

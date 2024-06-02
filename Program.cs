@@ -15,10 +15,11 @@ namespace CatBreedCatalog
 
             builder.Services.AddRazorPages();
 
-
-			builder.Services.AddDbContext<CatBreedContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("CatBreedContext")));//
+			//Rejestruje CatBreedContext jako us³ugê bazodanow¹
+			builder.Services.AddDbContext<CatBreedContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("CatBreedContext")));
 			
-            builder.Services.AddDistributedMemoryCache();
+            //pobiera ³añcuch po³¹czenia z pliku konfiguracyjnego
+			builder.Services.AddDistributedMemoryCache();
 			builder.Services.AddSession(options =>
 			{
 				options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -26,7 +27,8 @@ namespace CatBreedCatalog
 				options.Cookie.IsEssential = true;
 			});
 
-            builder.Services.AddAuthentication("Cookies")
+			//Konfiguruje sesjê z czasem wygaœniêcia 30 min
+			builder.Services.AddAuthentication("Cookies")
             .AddCookie("Cookies", options =>
             {
                 options.LoginPath = "/User/Login";
@@ -36,13 +38,15 @@ namespace CatBreedCatalog
 
 			var app = builder.Build();
 
+			//Inicjalizacja bazy danych
 			using (var scope = app.Services.CreateScope())
 			{
 				var services = scope.ServiceProvider;
 				var context = services.GetRequiredService<CatBreedContext>();
-				context.Database.EnsureCreated(); // Ensure the database is created without migrations
+				context.Database.EnsureCreated();
 			}
-			// Configure the HTTP request pipeline.
+
+			// Konfiguracja potoku ¿¹dañ HTTP
 			if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");

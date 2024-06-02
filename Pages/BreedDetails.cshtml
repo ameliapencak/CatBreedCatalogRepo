@@ -23,13 +23,13 @@
 					<p class="card-text"><strong>Description:</strong> @Model.CatBreed.Description</p>
 					<p class="card-text"><strong>Origin:</strong> @Model.CatBreed.Origin</p>
 					<p class="card-text"><strong>Temperament:</strong> @Model.CatBreed.Temperament</p>
-					@if (User.Identity.IsAuthenticated)
+					@if (User.Identity.IsAuthenticated)  //czy zalogowany
 					{
 						<a asp-page="/EditBreed" asp-route-id="@Model.CatBreed.Id" class="btn btn-outline-dark" id="buttonEdit">Edit</a>
-						@if (User.IsInRole("Admin"))
+						@if (User.IsInRole("Admin")) // czy admin
 						{
 							<form method="post" asp-page-handler="Delete">
-								<input type="hidden" asp-for="CatBreed.Id" />
+								<input type="hidden" asp-for="CatBreed.Id" /> 
 								<button type="submit" class="btn btn-outline-danger" id="buttonDelete">Delete</button>
 							</form>
 						}

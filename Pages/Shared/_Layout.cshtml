@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="~/css/pages/create.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/pages/user.css" asp-append-version="true" />
 	<script src="~/js/pages/createPage/displayImage.js" asp-append-version="true"></script>
+	<script src="~/js/alert.js" asp-append-version="true"></script>
 </head>
 <body>
 
@@ -19,7 +20,6 @@
 	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 m-1 border-bottom custom-header">
 		<a href="/Index" class="d-flex justify-content-center align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none fs-4 fw-bold">
 			Cat Catalog
-			
 		</a>
 
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -27,9 +27,20 @@
 			<li><a href="/Create" class="nav-link px-2 link-secondary">Create</a></li>
 		</ul>
 
+
 		<div class="d-flex col-sm-3 text-end align-items-center justify-content-center custom-buttons">
-			<a href="/User" class="btn btn-outline-dark">Login</a>
+			@if (User.Identity.IsAuthenticated)
+			{
+					<a href="/User" class="btn btn-outline-dark">Your Account</a>
+			}
+			else
+			{
+					<a href="/User" class="btn btn-outline-dark">Login</a>
+			}
 		</div>
+
+		
+		
 	</header>
 
 	<div class="container">
@@ -37,6 +48,7 @@
 			@RenderBody()
 		</main>
 	</div>
+	<div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
 
 	<footer class="border-top footer text-muted">
 		<div class="container" id="footerContainer">

@@ -8,10 +8,10 @@ namespace CatBreedCatalog.Models
 		public int Id { get; set; }
 
 		[Required]
-		public string FullName { get; set; }
+		public string FirstName { get; set; }
 
 		[Required]
-		public string Username { get; set; }
+		public string LastName { get; set; }
 
 		[Required]
 		public string Email { get; set; }
@@ -20,6 +20,6 @@ namespace CatBreedCatalog.Models
 		public string Password { get; set; }
 
 		[Required]
-		public string Role { get; set; } = "User"; // Domyślna rola to "User"
+		public string Role { get; set; } = "User"; // domyślna rola to "User"
 	}
 }

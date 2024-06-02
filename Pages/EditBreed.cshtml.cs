@@ -20,7 +20,7 @@ namespace CatBreedCatalog.Pages
         [BindProperty]
         public CatBreed CatBreed { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+		public async Task<IActionResult> OnGetAsync(int id)
         {
             CatBreed = await _context.CatBreeds.FindAsync(id);
 

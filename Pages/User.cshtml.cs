@@ -20,10 +20,10 @@ namespace CatBreedCatalog.Pages
 		}
 
 		[BindProperty]
-		public string FullName { get; set; }
+		public string FirstName { get; set; }
 
 		[BindProperty]
-		public string Username { get; set; }
+		public string LastName { get; set; }
 
 		[BindProperty]
 		public string Email { get; set; }
@@ -33,14 +33,20 @@ namespace CatBreedCatalog.Pages
 
 		[BindProperty]
 		public string ConfirmPassword { get; set; }
-
+		//do przechowywania
 		[TempData]
 		public string UserEmail { get; set; }
 
 		[TempData]
 		public string UserRole { get; set; }
 
-		public void OnGet()
+        [TempData]
+        public string Message { get; set; }
+
+        [TempData]
+        public string MessageType { get; set; }
+
+        public void OnGet()
 		{
 		}
 
@@ -48,24 +54,29 @@ namespace CatBreedCatalog.Pages
 		{
 			if (Password != ConfirmPassword)
 			{
-				ModelState.AddModelError("", "Passwords do not match");
-				return Page();
+				//ModelState.AddModelError("", "Passwords do not match");
+                Message = "Passwords do not match";
+                MessageType = "danger";
+                return Page();
 			}
 
 			var newUser = new User
 			{
-				FullName = FullName,
-				Username = Username,
+                FirstName = FirstName,
+                LastName = LastName,
 				Email = Email,
-				Password = Password, // In a real application, make sure to hash the password
-				Role = "User" // Domyœlna rola to "User"
+				Password = Password, 
+				Role = "User" 
 			};
 
 			_context.Users.Add(newUser);
 			await _context.SaveChangesAsync();
 			await SignInUser(newUser);
 
-			return RedirectToPage("/Index");
+            Message = "Registration successful!";
+            MessageType = "success";
+
+            return RedirectToPage("/User");
 		}
 
 		public async Task<IActionResult> OnPostLoginAsync()
@@ -74,35 +85,49 @@ namespace CatBreedCatalog.Pages
 			if (user == null)
 			{
 				ModelState.AddModelError("", "Invalid login attempt");
-				return Page();
+                Message = "Invalid email";
+                MessageType = "danger";
+                return Page();
 			}
-			await SignInUser(user);
-			return RedirectToPage("/Index");
+
+            if (user.Password != Password)
+            {
+                Message = "Invalid password";
+                MessageType = "danger";
+                return Page();
+            }
+
+            await SignInUser(user);
+            Message = "Login successful!";
+            MessageType = "success";
+            return RedirectToPage("/User");
 		}
 
 		public async Task<IActionResult> OnPostLogoutAsync()
 		{
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			return RedirectToPage("/Index");
+            Message = "Logout successful!";
+            MessageType = "success";
+            return RedirectToPage("/User");
 		}
 
 		private async Task SignInUser(User user)
 		{
-			var claims = new List<Claim>
+			var claims = new List<Claim> //lista roszczeñ
 			{
 				new Claim(ClaimTypes.Name, user.Email),
 				new Claim(ClaimTypes.Role, user.Role)
 			};
 
-			var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+			var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme); //tworzy torzsamoœæ, schemat uwierzytelniania
 
-			var authProperties = new AuthenticationProperties
+			var authProperties = new AuthenticationProperties //tworzenie w³aœciwoœci uwirzytelniania
 			{
-				IsPersistent = true
+				IsPersistent = true //ma byc trwa³e miedzy sesjami przegl¹darki
 			};
 
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-				new ClaimsPrincipal(claimsIdentity), authProperties);
+				new ClaimsPrincipal(claimsIdentity), authProperties); //logowanie
 		}
 	}
 }

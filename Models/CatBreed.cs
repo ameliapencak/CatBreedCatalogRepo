@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-
-namespace CatBreedCatalog.Models
+﻿namespace CatBreedCatalog.Models
 {
     public class CatBreed
     {

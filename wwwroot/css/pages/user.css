@@ -95,3 +95,11 @@ button:hover {
     }
 
 }
+
+#buttonLogout {
+    bottom: 20px;
+    right: 80px;
+    width: auto;
+    padding: 5px 10px;
+
+}

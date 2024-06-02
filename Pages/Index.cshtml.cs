@@ -16,9 +16,9 @@ namespace CatBreedCatalog.Pages
 			_context = context;
 		}
 
-		public IList<CatBreed>? CatBreeds { get; private set; }
+		public IList<CatBreed>? CatBreeds { get; private set; }// lista przechowuje rasy kotów
 
-		public async Task OnGetAsync()
+		public async Task OnGetAsync() //wywoływania przy rządaniu GET (automatycznie)
 		{
 			CatBreeds = await _context.CatBreeds.ToListAsync();
 		}

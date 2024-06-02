@@ -8,8 +8,7 @@
     <div class="row">
         @foreach (var breed in Model.CatBreeds)
         {
-            var imageBase64 = breed.ImageData != null
-            ? "data:image/jpeg;base64," + Convert.ToBase64String(breed.ImageData)
+            var imageBase64 = breed.ImageData != null ? "data:image/jpeg;base64," + Convert.ToBase64String(breed.ImageData)
             : Url.Content("~/photos/iconPhoto.png");
             <div class="up-card col-md-4 mb-4">
                 <div class="card">
